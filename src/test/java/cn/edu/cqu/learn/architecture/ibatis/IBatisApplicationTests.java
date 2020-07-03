@@ -1,10 +1,14 @@
 package cn.edu.cqu.learn.architecture.ibatis;
 
+import cn.edu.cqu.learn.architecture.ibatis.typehandler.SimpleTypeHandler;
+import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.executor.SimpleExecutor;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.type.TypeHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
@@ -60,5 +64,17 @@ class IBatisApplicationTests {
     @Test
     SqlSession sqlSession() {
         return sqlSessionFactory().openSession((Connection) null);
+    }
+
+    // 这个要有个单独的学习
+    @Test
+    Executor executor() {
+        return new SimpleExecutor(null, null);
+    }
+
+    // 这个也要单独学习，还要弄懂原理
+    @Test
+    TypeHandler<String> typeHandler() {
+        return new SimpleTypeHandler();
     }
 }

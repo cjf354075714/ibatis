@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!--默认的属性配置，没有什么特殊的要求-->
+    <properties>
+        <property name="" value=""/>
+    </properties>
+
+    <!--默认的一些设置信息-->
+    <!--这里配置信息，是配置和 JAVA 对象的链接，我们不需要知道细节，只需要知道某些配置怎么用，有什么用就行了-->
+    <settings>
+        <!--比如这个 SQL 的执行器的类别，我们传入 String，它下面将自动解析-->
+        <!--并返回正确的结果-->
+        <setting name="defaultExecutorType" value="BATCH"/>
+    </settings>
+
+    <!--别名和类全路径的映射关系-->
+    <!--不是特别必要去看-->
+<!--    <typeAliases>-->
+<!--        <typeAlias type=""/>-->
+<!--        <package name=""/>-->
+<!--    </typeAliases>-->
+    
+    <typeHandlers>
+        <typeHandler handler="cn.edu.cqu.learn.architecture.ibatis.typehandler.SimpleTypeHandler"/>
+    </typeHandlers>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
