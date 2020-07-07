@@ -1,5 +1,6 @@
 package cn.edu.cqu.learn.architecture.ibatis;
 
+import cn.edu.cqu.learn.architecture.ibatis.entity.BaseEntity;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
 
 @SpringBootApplication
 public class IBatisApplication {
@@ -19,6 +21,15 @@ public class IBatisApplication {
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
+        BaseEntity inDb = new BaseEntity();
+        inDb.setId(new BigInteger("1"));
+
+        // 执行 insert
+        sqlSession.insert("insert", inDb);
+//        sqlSession.delete("cn.edu.cqu.learn.architecture.ibatis.mapper.BaseEntityMapper.delete", new BigInteger("1"));
+        sqlSession.commit();
+        sqlSession.close();
+
     }
 
 }

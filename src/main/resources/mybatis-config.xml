@@ -21,11 +21,11 @@
 <!--        <package name=""/>-->
 <!--    </typeAliases>-->
     
-    <typeHandlers>
-        <typeHandler handler="cn.edu.cqu.learn.architecture.ibatis.typehandler.SimpleTypeHandler"/>
-    </typeHandlers>
+<!--    <typeHandlers>-->
+<!--        <typeHandler handler="cn.edu.cqu.learn.architecture.ibatis.typehandler.SimpleTypeHandler"/>-->
+<!--    </typeHandlers>-->
 
-    <environments default="development">
+    <environments default="test">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
@@ -37,15 +37,16 @@
         </environment>
         <environment id="test">
             <transactionManager type="JDBC"/>
-            <dataSource type="">
+            <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC"/>
                 <property name="username" value="root"/>
                 <property name="password" value="123456"/>
             </dataSource>
         </environment>
     </environments>
+    <!--引擎将通过下面的配置，去配置一下 Mapper， 我以后自己通过代码的方式去配置-->
     <mappers>
-        <package name="./mapper/*"/>
+        <mapper resource="mapper/BaseEntityMapper.xml"/>
     </mappers>
 </configuration>
