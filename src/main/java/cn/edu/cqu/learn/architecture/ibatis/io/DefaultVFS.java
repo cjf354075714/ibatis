@@ -1,7 +1,5 @@
 package cn.edu.cqu.learn.architecture.ibatis.io;
 
-import com.mysql.cj.util.TestUtils;
-import jdk.management.resource.ResourceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +10,6 @@ import java.net.URLEncoder;
 import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
