@@ -21,7 +21,7 @@ public class TypeHandlerRegistry {
             typeHandlerMap = new ConcurrentHashMap<>();
 
     // 未知的类型
-    private final TypeHandler<Object> unknownTypeHandler;
+    private final TypeHandler<Object> unknownTypeHandler = null;
 
     private final Map<Class<?>, TypeHandler<?>>
             allTypeHandlersMap = new HashMap<>();
