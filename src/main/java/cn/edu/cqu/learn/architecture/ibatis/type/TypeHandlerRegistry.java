@@ -25,4 +25,8 @@ public class TypeHandlerRegistry {
 
     private final Map<Class<?>, TypeHandler<?>>
             allTypeHandlersMap = new HashMap<>();
+
+    private static final Map<JdbcType, TypeHandler<?>> NULL_TYPE_HANDLER_MAP = null;
+
+    private Class<? extends TypeHandler<?>> defaultEnumTypeHandler = null;
 }
