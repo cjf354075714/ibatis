@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.EnumMap;
@@ -23,6 +24,8 @@ class IBatisApplicationTests {
     static {
         SLF4J = LoggerFactory.getLogger(IBatisApplicationTests.class);
     }
+
+    private List<Map<String, Object>> doubleParamType = Collections.emptyList();
 
     @Test
     void contextLoads() {
@@ -76,6 +79,33 @@ class IBatisApplicationTests {
     // 对于不同的类，它的 Class 是不同的，这些 Class 可以按照分类，分成好几种
     // 所以，有几种，就有几种 Type 的接口
     // 下面就有一个现成的
+
+    // 2020/7/18 新增理解：
+    // JAVA 中有类型这样一个概念，我们不需要知道这个概念的来源，我们只需要知道
+    // 这个概念的与反射，Class 对象有关，它是用来描述对象实例的类型的
+    // 那么这个 Type 又细分为几个类型：
+    //
+    // 1，原始类型
+    // 2，参数类型
+    // 3，数组类型
+    // 4，类型变量
+    // 5，基础类型
+    //
+    // 但是我怎么去拿到这些类型呢
+    //
+    // 实际上，这些类型，就是不同的类对象的类型的具体描述
+    // 原始类型我没找到具体的接口实现
+    //
+    // 参数类型，到底这个参数类型表达了什么？
+    // List<String> 它的类型，就是参数类型，只要有模板类型，带了具体的模板类，则一定是参数类型
+    // 现在，我们知道了这样的一个参数类型，我需要去拿到这个参数类型的最外面的类型
+    // getRawType() 这个方法，就可以拿到
+    // 如果是特殊的参数类型，比如 Map.Entry<String, Object>
+    // 则我们可以通过
+    // getOwnerType() 拿到 Map 这个最外层的类型，如果它本生就是个外层类型，则返回 null
+    // 现在，我拿到了这个参数类型，我该怎么去拿到具体的模板类型呢
+    // getActualTypeArguments() 将返回这些类型
+    // 因为可以有多个模板参数，所以返回的是数组
     @Test
     void type() {
 
@@ -83,18 +113,21 @@ class IBatisApplicationTests {
 
     // 当一个类，有自己的模板类的时候，那么，他的直接通用父类，就是 ParameterizedType 的实际实现者
     // 自然，我们就可以通过这个 ParameterizedType 拿到它的具体的模板类型
+    // 拿到了参数类型，我们能干什么呢，其实可以自己去创建参数类型，或者做一些其他判断
     @Test
     void parameterizedType() {
-        List<String> temp = new LinkedList<>();
-        Class<?> tempClass = temp.getClass();
-
-        // 如果是模板类型，则一定是参数类型
-        Type type = tempClass;
-        ParameterizedType parameterizedType = (ParameterizedType) type;
-        Type[] types = parameterizedType.getActualTypeArguments();
-        Type type1 = types[0];
-        SLF4J.info("");
-
+        Class<?> testClass = IBatisApplicationTests.class;
+        Field[] declaredFields = testClass.getDeclaredFields();
+        for (Field field : declaredFields) {
+            Type type = field.getGenericType();
+            if (type instanceof ParameterizedType) {
+                ParameterizedType parameterizedType = (ParameterizedType) type;
+                Type listType = parameterizedType.getRawType();
+                Type ownType = parameterizedType.getOwnerType();
+                Type[] actualTypes = parameterizedType.getActualTypeArguments();
+                SLF4J.info("");
+            }
+        }
     }
 
     // class.getGenericSuperclass();

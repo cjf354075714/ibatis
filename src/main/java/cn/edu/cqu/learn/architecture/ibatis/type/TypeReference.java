@@ -36,10 +36,11 @@ public abstract class TypeReference<T> {
         ParameterizedType parameterizedType = (ParameterizedType) genericSuperClass;
 
 
-        // 拿到自己的真正的类型数组，我没明白为啥要这样去拿
+        // 参数类型拿到自己的模板参数数组，比如 Map<String, Object> 那拿到的就是
+        // String, Object 的数组
         Type[] realParameterType = parameterizedType.getActualTypeArguments();
 
-        // 我去拿到第一个
+        // 我去拿到第一个，为什么要拿到第一个
         Type result = realParameterType[0];
 
         // 拿到定义的类型
