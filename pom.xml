@@ -41,6 +41,12 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>cn.cqu.edu.learn.base</groupId>
+            <artifactId>normal-jdbc</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
 
     </dependencies>
 
