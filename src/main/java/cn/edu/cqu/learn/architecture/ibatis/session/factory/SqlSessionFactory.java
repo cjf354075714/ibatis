@@ -1,24 +1,22 @@
-package cn.edu.cqu.learn.architecture.ibatis.session;
+package cn.edu.cqu.learn.architecture.ibatis.session.factory;
+
+import cn.edu.cqu.learn.architecture.ibatis.core.Configuration;
+import cn.edu.cqu.learn.architecture.ibatis.enums.ExecutorType;
+import cn.edu.cqu.learn.architecture.ibatis.transaction.TransactionIsolationLevel;
+import cn.edu.cqu.learn.architecture.ibatis.session.SqlSession;
 
 import java.sql.Connection;
 
-/**
- * 用于构建 SqlSession 的工厂类
- * 实现该类的实例的生命周期同整个项目的生命周期相同
- */
-public interface SqlSessionFactory {
-
-    // 默认打开会话
+public interface  SqlSessionFactory {
     SqlSession openSession();
 
-    // 当前会话是否自动提交
     SqlSession openSession(boolean autoCommit);
 
-    // 使用一个 Connection 去构建
     SqlSession openSession(Connection connection);
 
-    // 根据事务的隔离级别去获取会话
     SqlSession openSession(TransactionIsolationLevel level);
+
+    SqlSession openSession(ExecutorType execType);
 
     SqlSession openSession(ExecutorType execType, boolean autoCommit);
 

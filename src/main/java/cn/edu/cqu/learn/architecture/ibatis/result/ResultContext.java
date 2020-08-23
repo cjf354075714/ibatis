@@ -1,10 +1,10 @@
-package cn.edu.cqu.learn.architecture.ibatis.session;
+package cn.edu.cqu.learn.architecture.ibatis.result;
 
 /**
- * 不知道有啥用
- * @param <T> 默认对象
+ * 在执行完 SQL 之后，会有一个结果，这就是那个结果的对象
  */
 public interface ResultContext<T> {
+
     T getResultObject();
 
     int getResultCount();
