@@ -17,5 +17,5 @@ public interface TransactionFactory {
 
     Transaction newTransaction(Connection connection);
 
-    Transaction newTransaction(DataSource dataSource, TransactionIsolationLevel level);
+    Transaction newTransaction(DataSource dataSource, TransactionIsolationLevel level, boolean autoCommit);
 }

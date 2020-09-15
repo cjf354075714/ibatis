@@ -1,7 +1,7 @@
 package cn.edu.cqu.learn.architecture.ibatis.session.factory;
 
 import cn.edu.cqu.learn.architecture.ibatis.core.Configuration;
-import cn.edu.cqu.learn.architecture.ibatis.enums.ExecutorType;
+import cn.edu.cqu.learn.architecture.ibatis.executor.enums.ExecutorType;
 import cn.edu.cqu.learn.architecture.ibatis.transaction.TransactionIsolationLevel;
 import cn.edu.cqu.learn.architecture.ibatis.session.SqlSession;
 

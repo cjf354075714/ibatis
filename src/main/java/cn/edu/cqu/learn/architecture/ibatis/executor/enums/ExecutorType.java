@@ -1,4 +1,4 @@
-package cn.edu.cqu.learn.architecture.ibatis.enums;
+package cn.edu.cqu.learn.architecture.ibatis.executor.enums;
 
 public enum ExecutorType {
 
