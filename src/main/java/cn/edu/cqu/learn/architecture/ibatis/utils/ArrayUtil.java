@@ -30,5 +30,6 @@ public class ArrayUtil {
         } else if ( char.class.equals(componentType) ) {
             return Arrays.hashCode( (char[]) object );
         }
+        return 0;
     }
 }
