@@ -113,7 +113,7 @@ public final class ReflectorUtil {
      * @param uniqueMethods 用于存储这些方法的 Map，写在这里，是为了不让这个 Util 类，有太多的内存占用
      * @return 方法数组
      */
-    public Method[] getClassMethods(Class<?> type, Map<String, Method> uniqueMethods) {
+    public static Method[] getClassMethods(Class<?> type, Map<String, Method> uniqueMethods) {
         Class<?> parentClass = type;
         while ( null != parentClass && Object.class != parentClass ) {
             // 我只是拿到这个类的单纯的方法
