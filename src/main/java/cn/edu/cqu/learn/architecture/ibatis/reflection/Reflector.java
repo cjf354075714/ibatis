@@ -59,6 +59,15 @@ public final class Reflector {
 
     }
 
+    /**
+     * 我不知道这个方法有什么用，但是他很简单
+     * @param name 检查字符串
+     * @return 是否符合条件
+     */
+    private boolean isValidPropertyName(String name) {
+        return !(name.startsWith("$")) || "serialVersionUID".equals(name) || "class".equals(name);
+    }
+
 
     public static boolean canControlMemberAccessible() {
         return false;
