@@ -4,7 +4,6 @@ import cn.edu.cqu.learn.architecture.ibatis.reflection.invoker.Invoker;
 import cn.edu.cqu.learn.architecture.ibatis.reflection.invoker.impl.MethodInvoker;
 import cn.edu.cqu.learn.architecture.ibatis.reflection.property.PropertyUtil;
 import cn.edu.cqu.learn.architecture.ibatis.utils.ReflectorUtil;
-import org.springframework.aop.MethodMatcher;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -156,8 +155,12 @@ public final class Reflector {
         if ( isAmbiguous ) {
             // 错误日志输出
         } else {
-            // 包装，并并记录
+            // 包装
             Invoker methodInvoker = new MethodInvoker(method);
+            // 键值对记录下来
+            // 但是，我还需要去记录一个东西，那就是我这个 Get 方法的返回类型的记录，记录的话也是方法名作为 key
+            // 那我么我就要去看，这个返回结果，到底有哪些类型
+            // 这些就是 JAVA 中 TYPE 的知识
             this.getMethods.put(name, methodInvoker);
         }
      }

@@ -1,4 +1,4 @@
-package cn.edu.cqu.learn.architecture.ibatis.resolver;
+package cn.edu.cqu.learn.architecture.ibatis.reflection.resolver;
 
 /**
  * 参数类型解析器
