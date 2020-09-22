@@ -6,8 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 
 public class TypeParameterResolverTest {
 
@@ -21,13 +23,19 @@ public class TypeParameterResolverTest {
     private String simpleString;
     private List simpleList;
     private List<Object> objectList;
+    private Map<String, Object> stringObjectMap;
+    private List<Map<String, Object>> mapList;
 
     @Test
     public void typeTest() {
         Field[] fields = TypeParameterResolverTest.class.getDeclaredFields();
         for ( Field index : fields ) {
             Type type = index.getGenericType();
-            SLF4J.info(type.toString());
+            if (ParameterizedType.class.isAssignableFrom(type.getClass()) ) {
+                ParameterizedType parameterizedType = (ParameterizedType) type;
+                Type rowType = parameterizedType.getRawType();
+                SLF4J.info(rowType.toString());
+            }
         }
     }
 

@@ -64,8 +64,38 @@
 
   ```java
   public interface ParameterizedType {
-  	// 拿到
+  	// 拿到模板类型里面的类型，还是举例说明
+      // List<String> list
+      // 如果我拿到 list 这个类型，那么它一定是个 ParameterizedType 类型
+      // 那么这个 getActualTypeArguments 返回结果就是一个大小为 1 的数组
+    // 里面的值就是 String 类型
+      // 依次类推，Map<String, Object> 返回的是 [String.class, Object.class]
   	Type[] getActualTypeArguments();
+      
+      // 这个方法，将返回最外面的集合类型，一般都是集合类型
+      // Map<String, Object> 将返回 Map
+      // List<String> 将返回 List
+      // 但是，这个 rawType 将返回的是一个 Class 对象
+      // 那我岂不是拿不到多层次嵌套结构
+      Type getRawType();
+      
+      // 返回当前集合类型的所在类型
+      // 前提是，你这个集合类型是某一个类的成员类型
+      // 比如，Map.Entry<String, Object> 就是 Map<String, Object> 的成员类型
+      // 那 Map.Entry<String, Object> 的 ownerType 就将返回 Map<String, Object>
+      Type getOwnerType();
+  }
+  ```
+  
+* TypeVariable 接口：翻译过来就是类型变量，那么本质上就是用来描述某个类中，那些字段是变量的类型
+
+  举例子：
+
+  ```
+  public class SimpleType<K extends InputStream, V> {
+  	K key;
+  	V value;
+  	
   }
   ```
 
