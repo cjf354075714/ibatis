@@ -68,7 +68,7 @@
       // List<String> list
       // 如果我拿到 list 这个类型，那么它一定是个 ParameterizedType 类型
       // 那么这个 getActualTypeArguments 返回结果就是一个大小为 1 的数组
-    // 里面的值就是 String 类型
+    	// 里面的值就是 String 类型
       // 依次类推，Map<String, Object> 返回的是 [String.class, Object.class]
   	Type[] getActualTypeArguments();
       
@@ -91,12 +91,63 @@
 
   举例子：
 
-  ```
+  ```java
   public class SimpleType<K extends InputStream, V> {
+      // 那么这里的 K 就是一个 TypeVariable，V 也是，然后这个 TypeVariable 的一些方法
+      // 将用来描述它们的细节
   	K key;
   	V value;
-  	
   }
   ```
 
-  
+  ```java
+  public interface TypeVariable<D extends GenericDeclaration> 
+      extends Type, AnnotatedElement {
+      // 拿到当前的这个类型的边界，注意，边界是上边界，如果没有定义就是 Object.class
+      // 为什么是数组呢，因为一个类型变量可以继承多个边界
+      Type[] getBounds();
+      
+      // 当前变量类型所在的那个 Type 对象，比如，你给一个 Map<K, V> 对象
+      // K 这个 TypeVariable 变量，这个方法将返回 Map 这个类型
+      D getGenericDeclaration();
+      
+      // 获取当前类型的名字
+      String getName();
+      
+      // 暂时不管
+      AnnotatedType[] getAnnotatedBounds();
+  }
+  ```
+
+* WildcardType 接口：它的理解，其实和参数类型有点相似，举例：
+
+  ```java
+  public class WildcardTypeTest {
+      // 这个变量就是一个参数类型，因为它指定了 List 中具体的实体，就是它的 getActualTypeArguments 
+      // 将返回一个 Class 类型
+      private List<InputStream> inputList;
+      
+      // 因为你这里没有指定一个具体的类型，但是指定了一个通配符。
+      // 所以，它的 getActualTypeArguments 就是一个通配符类型
+      // 但是它有一个最高等级的类型，所以 getUpperBounds 方法，将返回这个类型，
+      // 虽然 getUpperBounds 这个方法，返回的是数组，但是这个是因为可用性而设计的
+      private List<? extends InputStream> extInputStream;
+      
+      // 既然有上边界，那就有下边界，下边界的概念和上边界完全一样，getLowerBounds 将返回这个类型
+      private List<? super InputStream> supInputStream;
+      
+  }
+  ```
+
+  ```java
+  // 通配符类型 <? extends File> 就是通配符
+  public interface WildcardType extends Type {
+      // 获取通配符的顶级类型，虽然是数组返回结果，但是1.8版本的 JAVA 是只返回一个类型
+      Type[] getUpperBounds();
+      
+      // 获取通配符的底层类型，和 getUpperBounds 一样
+      Type[] getLowerBounds();
+  }
+  ```
+
+* GenericArrayType 接口：这个接口还有点意思，
