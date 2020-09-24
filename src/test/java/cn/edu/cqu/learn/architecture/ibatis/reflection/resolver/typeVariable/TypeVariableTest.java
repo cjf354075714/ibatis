@@ -1,7 +1,6 @@
 package cn.edu.cqu.learn.architecture.ibatis.reflection.resolver.typeVariable;
 
 import cn.edu.cqu.learn.architecture.ibatis.utils.ReflectorUtilTest;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +51,7 @@ public class TypeVariableTest {
         }
 
         @Override
-        public <T extends Annotation> T getAnnotation(@NotNull Class<T> annotationClass) {
+        public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
             return null;
         }
 

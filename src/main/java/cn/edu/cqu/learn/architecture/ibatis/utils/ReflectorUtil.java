@@ -1,7 +1,6 @@
 package cn.edu.cqu.learn.architecture.ibatis.utils;
 
 
-import sun.reflect.generics.scope.MethodScope;
 
 import java.lang.reflect.Method;
 import java.sql.Ref;

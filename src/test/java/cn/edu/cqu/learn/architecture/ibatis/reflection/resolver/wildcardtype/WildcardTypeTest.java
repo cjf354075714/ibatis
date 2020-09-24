@@ -1,7 +1,6 @@
 package cn.edu.cqu.learn.architecture.ibatis.reflection.resolver.wildcardtype;
 
 import cn.edu.cqu.learn.architecture.ibatis.utils.ReflectorUtilTest;
-import jdk.internal.util.xml.impl.Input;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -150,5 +150,48 @@
   }
   ```
 
-* GenericArrayType 接口：这个接口还有点意思，
+* GenericArrayType 接口：这个接口还有点意思，官方的解释说的是，参数类型和类型变量的数组
 
+  ```java
+  public class GenericArrayTypeTest<T> {
+      // 它是一个参数类型
+      T type;
+      
+      // 它是个 Class 类型，哦，懂了实际上 Class 类型它和什么通配符类型啊，是一个等级的
+      List<Object> object;
+      
+      // 它是个参数类型
+      List<T> typeList;
+      
+      // 当然这种写法是错误的，这里只是为了好看
+      // 它是个通配符类型
+      List<? extends InputStream> tInputSList;
+      List<? super FileInputStream> tFileSList;
+      
+      // 这个是个通常数组类型
+      T[] types;
+      List<T>[] tListS;
+      
+      // 既然通常数组类型和通配符类型，参数类型的获取方式差不多，那我就不详细写了
+  }
+  ```
+
+  ```java
+  // 通配符类型，当前这个类型，就代表了那些参数类型和类型变量的数组
+  // 我好奇，通配符类型数组将返回什么
+  public interface GenericArrayType extends Type {
+      // 这个方法，将返回当前这个数字，去掉 [] 的类型，比如
+      // T[] 去掉 [] 就是 T，那么他将返回类型变量
+      // Map<K, V>[] 去掉 [] 就是 Map<K, V>，将返回参数类型
+      // 那通配符呢，多维数组呢？
+      // 嘿嘿，对不起，通配符类型不能单独定义
+      // 如果是多维数组，那去掉 [] 之后，还是个数组，那就还是通常数组类型
+      // 所以，这个类型，可以产生其他的类型
+      Type getGenericComponentType();
+  }
+  
+  ```
+
+
+
+# 学完了！
