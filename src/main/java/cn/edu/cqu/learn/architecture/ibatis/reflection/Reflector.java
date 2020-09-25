@@ -162,6 +162,7 @@ public final class Reflector {
             // 那我么我就要去看，这个返回结果，到底有哪些类型
             // 这些就是 JAVA 中 TYPE 的知识
             this.getMethods.put(name, methodInvoker);
+
         }
      }
 
