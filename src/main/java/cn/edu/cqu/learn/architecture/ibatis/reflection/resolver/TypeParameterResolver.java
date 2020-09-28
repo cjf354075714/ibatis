@@ -42,6 +42,9 @@ public final class TypeParameterResolver {
     ) {
         Type result;
         Class<?> clazz;
+        // 接下来的判断逻辑，就是根据 srcType 的类型，去给 clazz 附上不同的值
+        // 如果 srcType 就是一个 Class，那么 clazz 就是一个 Class
+        // 如果 srcType 是一个参数化类型，则 clazz 就是这个参数化类型的最完成包装，就是 List，Map 等
         if ( srcType instanceof Class ) {
             clazz = (Class<?>) srcType;
         } else if ( srcType instanceof ParameterizedType ) {
@@ -50,8 +53,17 @@ public final class TypeParameterResolver {
         } else {
             // 如果你不是 Class 类型，也不是参数化类型，那我就直接报错
             // 为啥，因为我就是不处理其他类型
-            clazz = Object.class;
+            throw new RuntimeException("错误的 srcType 类型");
         }
 
+        // 如果我算出来的结果，直接等于了你定义的类型
+        // 这一段逻辑我没有明白，真不明白
+        if ( clazz == declaringClass ) {
+            Type[] bounds = typeVar.getBounds();
+            if ( bounds.length > 0 ) {
+                return bounds[0];
+            }
+            return Object.class;
+        }
     }
 }
