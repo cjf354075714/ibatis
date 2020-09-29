@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericDeclaration;
@@ -24,7 +25,7 @@ public class TypeVariableTest {
 
     @Test
     public void fieldTypeTest() throws NoSuchFieldException {
-        Field key = TypeVariableEntity.class.getDeclaredField("value");
+        Field key = TypeVariableEntity.class.getDeclaredField("key");
         Type type = key.getGenericType();
         if (TypeVariable.class.isAssignableFrom(type.getClass()) ) {
             // 但是我觉得没有必要去实现 GenericDeclaration 这个接口
@@ -39,7 +40,7 @@ public class TypeVariableTest {
         }
     }
 
-    private static class TypeVariableEntity<K extends InputStream, V> implements GenericDeclaration {
+    private static class TypeVariableEntity<K extends InputStream & Serializable, V> implements GenericDeclaration {
         // 字段
         K key;
         // 字段

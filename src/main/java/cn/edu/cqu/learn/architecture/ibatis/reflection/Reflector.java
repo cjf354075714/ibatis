@@ -13,7 +13,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * 该类代表了一个业务对象的解构，就比如我哪知道你这个类的细节呢，有哪些字段等等
+ * 包括所有的字段访问，访问方法的包装，构造函数的获取等
+ * 就想相当于我想要通过反射去构建一个我不知道的业务类时，
+ * 只需要拿到这个业务类的 Class 对象，我就可以去构造它
+ * 该类也有构造工厂，其工厂的定义和使用同 ObjectFactory
+ * 并没有特殊的地方，我们开发的过程中很少使用到自定义的
+ * ReflectorFactory
+ * @see cn.edu.cqu.learn.architecture.ibatis.reflection.factory.ReflectorFactory
+ * @see cn.edu.cqu.learn.architecture.ibatis.reflection.factory.impl.DefaultReflectorFactory
  */
 public final class Reflector {
 

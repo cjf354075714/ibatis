@@ -23,7 +23,7 @@ public class WildcardTypeTest {
 
     // 如果我这里使用了 ？ 来作为 List 的类型，那么这个参数类型的
     // 真实类型就是一个通配符类型
-    List<? super FileInputStream> wildCardType;
+    List<? extends FileInputStream> wildCardType;
 
     // 如果我直接使用了直接的对象，那该真实类型就是一个 Class，而不是一个通配符类型
     List<InputStream> classType;

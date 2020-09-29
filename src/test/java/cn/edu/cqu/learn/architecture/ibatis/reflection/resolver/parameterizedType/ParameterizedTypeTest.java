@@ -8,9 +8,10 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ParameterizedTypeTest {
+public class ParameterizedTypeTest<T> {
 
     private static final Logger SLF4J;
 
@@ -19,6 +20,8 @@ public class ParameterizedTypeTest {
     }
 
     private Map<String, Object> map;
+    private Map.Entry<String, Object> entry;
+    private List<T> tList;
 
     @Test
     public void test() {
@@ -27,5 +30,10 @@ public class ParameterizedTypeTest {
             Type type = index.getGenericType();
             SLF4J.info(type.toString());
         }
+    }
+
+    @Test
+    public void test1() {
+
     }
 }

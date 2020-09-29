@@ -65,5 +65,6 @@ public final class TypeParameterResolver {
             }
             return Object.class;
         }
+        return null;
     }
 }
